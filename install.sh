@@ -22,4 +22,4 @@ sudo chmod +x /usr/local/bin/gohost
 
 echo "[*] Installation complete!"
 echo "You can now run 'gohost' from anywhere:"
-echo "Example: gohost -port=8080 -path=/home/user/website -tunnel=serveo"
+echo "Example: gohost -port 8080 -path /home/user/website -tunnel serveo"

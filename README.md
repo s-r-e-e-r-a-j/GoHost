@@ -70,6 +70,17 @@ gohost -port=8080 -path=/home/user/files
 ```bash
 gohost -port=8080 -path=/home/user/files -download=true
 ```
+5. **Expose on the internet**
+```bash
+# Expose via Serveo 
+gohost -port=8080 -path=/home/user/files -tunnel=serveo
+
+# Expose via Cloudflared 
+gohost -port=8080 -path=/home/user/files -tunnel=cloudflared
+
+# Expose via Cloudflared and enable download mode for non-web files
+gohost -port=8080 -path=/home/user/files -tunnel=cloudflared -download=true
+```
 ## Host a Website (HTML/CSS/JS Only)
 
 **Requirement**: Your folder must contain only `.html`, `.css`, and `.js` files

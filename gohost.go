@@ -10,7 +10,7 @@ import (
 	"os/exec"
 	"regexp"
 	"runtime"
-        "time"
+    "time"
 )
 
 // checkInstall installs a command if not found

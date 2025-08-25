@@ -5,7 +5,7 @@ if [[ "$EUID" -ne 0 ]]; then
     exit 1
 fi
 
-# Check if ghost.go exists
+# Check if gohost.go exists
 if [[ ! -f "gohost.go" ]]; then
     echo "gohost.go not found in this directory. Please place it here."
     exit 1
@@ -22,4 +22,4 @@ sudo chmod +x /usr/local/bin/gohost
 
 echo "[*] Installation complete!"
 echo "You can now run 'gohost' from anywhere:"
-echo "Example: gohost -port 8080 -path /home/user/website -tunnel serveo"
+echo "Example: gohost -port=8080 -path=/home/user/website -tunnel=serveo"

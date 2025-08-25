@@ -61,26 +61,26 @@ gohost
 ```
 3. **Host the current directory on a custom port (view only)**
 ```bash
-gohost -port=8080
+gohost -port 8080
 ```
 5. **Host a specific folder on a custom port (view only)**
 ```bash
-gohost -port=8080 -path=/home/user/files
+gohost -port 8080 -path /home/user/files
 ```
 4. **Host a folder with download mode enabled (non-web files downloadable)**
 ```bash
-gohost -port=8080 -path=/home/user/files -download=true
+gohost -port 8080 -path /home/user/files -download true
 ```
 5. **Expose a folder on the internet**
 ```bash
 # Expose using Serveo 
-gohost -port=8080 -path=/home/user/files -tunnel=serveo
+gohost -port 8080 -path /home/user/files -tunnel serveo
 
 # Expose using Cloudflared 
-gohost -port=8080 -path=/home/user/files -tunnel=cloudflared
+gohost -port 8080 -path /home/user/files -tunnel cloudflared
 
 # Expose using Cloudflared and enable download mode for non-web files
-gohost -port=8080 -path=/home/user/files -tunnel=cloudflared -download=true
+gohost -port 8080 -path /home/user/files -tunnel cloudflared -download true
 ```
 ## Host a Website (HTML/CSS/JS Only)
 
@@ -88,19 +88,19 @@ gohost -port=8080 -path=/home/user/files -tunnel=cloudflared -download=true
 (e.g., `index.html`, `style.css`, `script.js`). No other file types.
 ```bash
 # Default port 8000
-gohost -path=/home/user/website
+gohost -path /home/user/website
 
 # Custom port
-gohost -port=8080 -path=/home/user/website
+gohost -port 8080 -path /home/user/website
 ```
 
 **Expose the website on the internet:**
 ```bash
 # Serveo
-gohost -port=8080 -path=/home/user/website -tunnel=serveo
+gohost -port 8080 -path /home/user/website -tunnel serveo
 
 # Cloudflared
-gohost -port=8080 -path=/home/user/website -tunnel=cloudflared
+gohost -port 8080 -path /home/user/website -tunnel cloudflared
 ```
 ## License
 This project is licensed under the MIT License

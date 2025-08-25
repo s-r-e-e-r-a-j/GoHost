@@ -1,5 +1,5 @@
 ## GoHost
-**GoHost** is a powerful Linux HTTP server tool written in Go. It allows you to host websites, serve files, and optionally allow downloads for non-web files. You can expose your server to the internet using **Serveo** or **Cloudflared** tunnels, making it accessible from anywhere.
+**GoHost** is a powerful Linux Debian HTTP server tool written in Go. It allows you to host websites, serve files, and optionally allow downloads for non-web files. You can expose your server to the internet using **Serveo** or **Cloudflared** tunnels, making it accessible from anywhere.
 
 ## Features
 
@@ -16,7 +16,7 @@
 - Automatically installs SSH (for Serveo) and Cloudflared if missing.
 
 ## Compatibility
-- Linux (Debian, RedHat, Arch, etc..)
+- Linux (Debian)
 
 ## Installation
 

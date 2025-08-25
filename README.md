@@ -9,7 +9,7 @@
 
 - When download mode is **off**, files are only viewable in the browser.
 
-- When download mode is **on**, non-web files can be downloaded.
+- When download mode is **on**, non-web files can be downloadable.
 
 - Access your server from anywhere using Serveo or Cloudflared tunnels.
 

@@ -90,3 +90,5 @@ gohost -port 8080 -path /home/user/website -tunnel serveo
 # Cloudflared
 gohost -port 8080 -path /home/user/website -tunnel cloudflared
 ```
+## License
+This project is licensed under the MIT License

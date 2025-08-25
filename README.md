@@ -16,7 +16,7 @@
 - Automatically installs SSH (for Serveo) and Cloudflared if missing.
 
 ## Compatibility
-- Linux (Debian, RedHat, Arch)
+- Linux (Debian, RedHat, Arch, etc..)
 
 ## Installation
 

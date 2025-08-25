@@ -71,7 +71,7 @@ gohost -port=8080 -path=/home/user/files
 ```bash
 gohost -port=8080 -path=/home/user/files -download=true
 ```
-5. **Expose on the internet**
+5. **Expose a folder on the internet**
 ```bash
 # Expose using Serveo 
 gohost -port=8080 -path=/home/user/files -tunnel=serveo

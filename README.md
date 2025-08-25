@@ -7,7 +7,7 @@
 
 - Render `.html`, `.htm`, `.css`, and `.js` files as websites.
 
-- When download mode is **off**, files are only viewable in the browser.
+- When download mode is **off**, files can only be viewed in the browser by clicking on them.
 
 - When download mode is **on**, non-web files can be downloaded by clicking on them.
 

@@ -15,6 +15,9 @@
 
 - Automatically installs SSH (for Serveo) and Cloudflared if missing.
 
+## Compatibility
+- Linux (Debian, RedHat, Arch)
+
 ## Installation
 
 1. **Clone the GoHost repository:**

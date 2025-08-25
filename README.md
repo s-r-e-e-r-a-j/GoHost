@@ -19,19 +19,20 @@
 - Linux (Debian)
 
 ## Installation
-
-1. **Clone the GoHost repository:**
+1. **Make sure you have Go installed**
+   
+2. **Clone the GoHost repository:**
    
 ```bash
 git clone https://github.com/s-r-e-e-r-a-j/GoHost.git
 ```
-2. **Navigate to the GoHost folder:**
+3. **Navigate to the GoHost folder:**
 
 ```bash
 cd GoHost
 ```
 
-3. **Run the installer:**
+4. **Run the installer:**
 
 ```bash
 sudo bash install.sh

@@ -161,24 +161,32 @@ func main() {
 
     var serveoCmd *exec.Cmd
     var cloudflaredCmd *exec.Cmd
-	
+
+    sigChan := make(chan os.Signal, 1)
+    signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+
+    go func() {
+        <-sigChan
+        fmt.Println("\n[*] Caught interrupt signal, cleaning up...")
+
+        if serveoCmd != nil && serveoCmd.Process != nil {
+            fmt.Println("[*] Killing Serveo tunnel...")
+            serveoCmd.Process.Kill()
+        }
+
+        if cloudflaredCmd != nil && cloudflaredCmd.Process != nil {
+            fmt.Println("[*] Killing Cloudflared tunnel...")
+            cloudflaredCmd.Process.Kill()
+        }
+
+        os.Exit(0)
+     }()
+		
     // Start tunnel if specified
     if *tunnel == "serveo" {
 	     serveoCmd = startServeo(*port)
-	     defer func() {
-		      if serveoCmd != nil && serveoCmd.Process != nil {
-			      fmt.Println("[*] Killing Serveo tunnel...")
-			      serveoCmd.Process.Kill()
-		       }
-	     }()
     } else if *tunnel == "cloudflared" {
 	           cloudflaredCmd = startCloudflared(*port)
-               defer func() {
-                    if cloudflaredCmd != nil && cloudflaredCmd.Process != nil {
-                        fmt.Println("[*] Killing Cloudflared tunnel...")
-                        cloudflaredCmd.Process.Kill()
-                    }
-              }()
     }
 	
 	// Start HTTP server

@@ -12,6 +12,7 @@ import (
 	"os/exec"
 	"regexp"
 	"runtime"
+	"path/filepath"
     "time"
 )
 
@@ -107,16 +108,11 @@ func fileHandler(path string, forceDownload bool) http.Handler {
 		}
 
 		if forceDownload {
-			ext := ""
-			for i := len(filePath) - 5; i < len(filePath); i++ {
-				if i >= 0 {
-					ext += string(filePath[i])
-				}
-			}
-			if !webExts[ext] {
-				w.Header().Set("Content-Disposition", "attachment; filename="+stat.Name())
-				w.Header().Set("Content-Type", "application/octet-stream")
-			}
+		    ext := filepath.Ext(filePath)
+            if !webExts[ext] {
+                 w.Header().Set("Content-Disposition", "attachment; filename="+stat.Name())
+                 w.Header().Set("Content-Type", "application/octet-stream")
+            }			
 		}
 
 		http.ServeFile(w, r, filePath)

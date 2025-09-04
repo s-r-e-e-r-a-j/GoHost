@@ -152,6 +152,7 @@ func main() {
 	// Install Cloudflared if using Cloudflared
 	if *tunnel == "cloudflared" {
 		checkInstall("cloudflared", []string{"sudo", "wget", "-qO", "/usr/local/bin/cloudflared", "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"})
+		
 		cloudflaredPath := "/usr/local/bin/cloudflared"
         if info, err := os.Stat(cloudflaredPath); err == nil {
             mode := info.Mode()

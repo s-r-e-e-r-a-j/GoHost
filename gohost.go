@@ -42,7 +42,7 @@ func startServeo(port int) *exec.Cmd {
 }
 
 // startCloudflared starts Cloudflared tunnel
-func startCloudflared(port int) {
+func startCloudflared(port int) *exec.Cmd {
 	fmt.Println("[*] Starting Cloudflared tunnel...")
 	cmd := exec.Command("cloudflared", "tunnel", "--url", fmt.Sprintf("http://localhost:%d", port))
 
@@ -76,7 +76,7 @@ func startCloudflared(port int) {
 	}
 
 	fmt.Printf("[Cloudflared URL] %s\n", lastURL)
-	cmd.Wait() // keep tunnel running
+	return cmd
 }
 
 // fileHandler
@@ -162,7 +162,8 @@ func main() {
 	http.Handle("/", fileHandler(servePath, *download))
 
     var serveoCmd *exec.Cmd
-
+    var cloudflaredCmd *exec.Cmd
+	
     // Start tunnel if specified
     if *tunnel == "serveo" {
 	     serveoCmd = startServeo(*port)
@@ -173,7 +174,13 @@ func main() {
 		       }
 	     }()
     } else if *tunnel == "cloudflared" {
-	         go startCloudflared(*port)
+	           cloudflaredCmd := startCloudflared(*port)
+               defer func() {
+                    if cloudflaredCmd != nil && cloudflaredCmd.Process != nil {
+                        fmt.Println("[*] Killing Cloudflared tunnel...")
+                        cloudflaredCmd.Process.Kill()
+                    }
+              }()
     }
 	
 	// Start HTTP server

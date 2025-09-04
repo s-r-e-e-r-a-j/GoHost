@@ -152,7 +152,19 @@ func main() {
 	// Install Cloudflared if using Cloudflared
 	if *tunnel == "cloudflared" {
 		checkInstall("cloudflared", []string{"sudo", "wget", "-qO", "/usr/local/bin/cloudflared", "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"})
-		exec.Command("sudo", "chmod", "+x", "/usr/local/bin/cloudflared").Run()
+		cloudflaredPath := "/usr/local/bin/cloudflared"
+        if info, err := os.Stat(cloudflaredPath); err == nil {
+            mode := info.Mode()
+            if mode&0111 == 0 { // if not executable
+                fmt.Println("[*] Setting execute permission for Cloudflared...")
+                cmd := exec.Command("sudo", "chmod", "+x", cloudflaredPath)
+                cmd.Stdout = os.Stdout
+                cmd.Stderr = os.Stderr
+                if err := cmd.Run(); err != nil {
+                    log.Fatalf("Failed to set execute permission for Cloudflared: %v", err)
+                 }
+             }
+        }
 	}
 
 	// Serve files

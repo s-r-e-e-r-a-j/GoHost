@@ -35,7 +35,7 @@ func startServeo(port int) {
 	cmd := exec.Command("ssh", "-R", fmt.Sprintf("80:localhost:%d", port), "serveo.net")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Run()
+	cmd.Start()
 }
 
 // startCloudflared starts Cloudflared tunnel

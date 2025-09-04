@@ -30,12 +30,15 @@ func checkInstall(command string, installCmd []string) {
 }
 
 // startServeo starts a Serveo tunnel
-func startServeo(port int) {
+func startServeo(port int) *exec.Cmd {
 	fmt.Println("[*] Starting Serveo tunnel...")
 	cmd := exec.Command("ssh", "-R", fmt.Sprintf("80:localhost:%d", port), "serveo.net")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Start()
+	if err := cmd.Start(); err != nil {
+		log.Fatalf("Failed to start Serveo: %v", err)
+	}
+	return cmd
 }
 
 // startCloudflared starts Cloudflared tunnel
@@ -158,13 +161,21 @@ func main() {
 	fmt.Printf("[*] Serving %s on http://localhost:%d\n", servePath, *port)
 	http.Handle("/", fileHandler(servePath, *download))
 
-	// Start tunnel if specified
-	if *tunnel == "serveo" {
-		go startServeo(*port)
-	} else if *tunnel == "cloudflared" {
-		go startCloudflared(*port)
-	}
+    var serveoCmd *exec.Cmd
 
+    // Start tunnel if specified
+    if *tunnel == "serveo" {
+	     serveoCmd = startServeo(*port)
+	     defer func() {
+		      if serveoCmd != nil && serveoCmd.Process != nil {
+			      fmt.Println("[*] Killing Serveo tunnel...")
+			      serveoCmd.Process.Kill()
+		       }
+	     }()
+    } else if *tunnel == "cloudflared" {
+	         go startCloudflared(*port)
+    }
+	
 	// Start HTTP server
 	err := http.ListenAndServe(fmt.Sprintf(":%d", *port), nil)
 	if err != nil {

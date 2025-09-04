@@ -174,7 +174,7 @@ func main() {
 		       }
 	     }()
     } else if *tunnel == "cloudflared" {
-	           cloudflaredCmd := startCloudflared(*port)
+	           cloudflaredCmd = startCloudflared(*port)
                defer func() {
                     if cloudflaredCmd != nil && cloudflaredCmd.Process != nil {
                         fmt.Println("[*] Killing Cloudflared tunnel...")
